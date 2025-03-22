@@ -20,7 +20,7 @@
       "supportsTablet": true
     },
     "android": {
-      "package": "com.yourname.trackaicoach",
+      "package": "com.joeycucci.trackaicoach",
       "versionCode": 1
     },
     "web": {
