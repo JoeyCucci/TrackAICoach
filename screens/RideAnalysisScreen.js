@@ -2,7 +2,27 @@ import React from 'react';
 import { StyleSheet, Text, View, ScrollView, Platform } from 'react-native';
 
 export default function RideAnalysisScreen({ route }) {
-  const { bikeDetails, testData, avgHPE, testDuration, laps, lapTimes, maxSpeed, corneringScore, accelHistory, startCoords, totalDistance, totalTime, movingTime, numJumps, cornerSpeeds, brakingEvents, accelEvents, jumpDurations } = route.params;
+  // Provide default values to prevent undefined errors
+  const { 
+    bikeDetails = { track: 'Unknown', date: 'N/A' }, 
+    testData = [], 
+    avgHPE = '0.0', 
+    testDuration = '0.0', 
+    laps = 0, 
+    lapTimes = [], 
+    maxSpeed = 0, 
+    corneringScore = 0, 
+    accelHistory = [], 
+    startCoords = { latitude: 0, longitude: 0 }, 
+    totalDistance = 0, 
+    totalTime = 0, 
+    movingTime = 0, 
+    numJumps = 0, 
+    cornerSpeeds = [], 
+    brakingEvents = [], 
+    accelEvents = [], 
+    jumpDurations = [] 
+  } = route.params;
 
   // Ensure lapTimes is an array
   const safeLapTimes = Array.isArray(lapTimes) ? lapTimes : [];
@@ -41,7 +61,7 @@ export default function RideAnalysisScreen({ route }) {
       <Text style={styles.header}>Track AI Coach - Ride Analysis</Text>
       <Text style={styles.subHeader}>Track: {bikeDetails.track}</Text>
       <Text style={styles.subHeader}>Date: {bikeDetails.date}</Text>
-      <Text style={styles.subHeader}>Start Coordinates: {startCoords ? `${startCoords.latitude.toFixed(6)}, ${startCoords.longitude.toFixed(6)}` : 'N/A'}</Text>
+      <Text style={styles.subHeader}>Start Coordinates: {startCoords.latitude !== 0 ? `${startCoords.latitude.toFixed(6)}, ${startCoords.longitude.toFixed(6)}` : 'N/A'}</Text>
       <Text>Laps Completed: {laps}</Text>
       <Text>Best Lap: {bestLapTime} s</Text>
       <Text>Avg Lap Time: {avgLapTime} s</Text>
